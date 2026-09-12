@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lo de Siempre</title>
+<meta name="description" content="El programa de fidelidad de los bares de barrio.">
+<!--
+  La portada. Existe para que la raíz no sea un 404 cuando estas páginas
+  se sirven por GitHub Pages, y para que haya un sitio al que apuntar si
+  alguien teclea el dominio a secas.
+
+  Deliberadamente no vende nada: la captación la hace el cartón del bar,
+  no esta página. Aquí sólo se llega por curiosidad o buscando lo legal.
+-->
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0B0F14;
+    --surface: #151C24;
+    --border: #2A3644;
+    --text: #F2F5F8;
+    --muted: #93A1B0;
+    --faint: #5D6C7B;
+    --acento: #E0A458;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+    background: var(--bg); color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 460px; width: 100%; }
+  .marca {
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 10px;
+  }
+  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 14px; }
+  p { color: var(--muted); margin: 0 0 14px; }
+  .enlaces { display: grid; gap: 10px; margin-top: 28px; }
+  a.tarjeta {
+    display: block; text-decoration: none;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    color: var(--text); font-weight: 600;
+  }
+  a.tarjeta span { display: block; color: var(--faint); font-weight: 400; font-size: 14px; margin-top: 2px; }
+  a.tarjeta:hover { border-color: var(--acento); }
+  footer { margin-top: 32px; color: var(--faint); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="marca">Lo de Siempre</div>
+  <h1>El pase de tu bar de siempre</h1>
+  <p>
+    Te haces socio, enseñas el carnet al pagar y cada visita suma. Cuando
+    llegas a un checkpoint, el bar te lo devuelve.
+  </p>
+  <p>
+    Para usarlo hace falta que tu bar esté en el programa. Si no lo está,
+    díselo.
+  </p>
+
+  <div class="enlaces">
+    <a class="tarjeta" href="privacidad.html">
+      Política de privacidad
+      <span>Qué datos tratamos, para qué y cuánto tiempo</span>
+    </a>
+    <a class="tarjeta" href="borrar-cuenta.html">
+      Borrar mi cuenta
+      <span>Cómo darte de baja, con o sin la app instalada</span>
+    </a>
+  </div>
+
+  <footer>Lo de Siempre</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Borrar mi cuenta · Lo de Siempre</title>
+<meta name="description" content="Cómo borrar tu cuenta de Lo de Siempre y qué datos se eliminan.">
+<!--
+  QUÉ ES ESTO. La URL de solicitud de borrado de cuenta que Google Play
+  exige desde 2023 a toda app que permita registrarse. Que el borrado
+  exista DENTRO de la app no basta: tiene que poder pedirse desde la web,
+  sin instalar nada, porque el caso que Google quiere cubrir es justo el
+  de quien ya la desinstaló.
+
+  DÓNDE VA. lodesiempre.app/borrar-cuenta — y esa URL se pega en Play
+  Console, en Seguridad de los datos -> "Solicitar eliminación de datos".
+
+  NO PUBLICAR TODAVÍA. El correo que sale aquí, hola@lodesiempre.app,
+  NO EXISTE: el dominio lodesiempre.app no está ni registrado (12-sep-2026,
+  el DNS devuelve NXDOMAIN). Una página de borrado que apunta a un buzón
+  muerto es peor que no tenerla, porque promete una vía de ejercicio de
+  derechos que no funciona. Primero el dominio, después el buzón, después
+  esto.
+
+  LO QUE DICE SALE DEL CÓDIGO: delete_my_account() borra la fila de
+  auth.users; de ahí caen en cascada profiles, memberships y redemptions.
+  transactions.user_id está en ON DELETE SET NULL desde la 0006, así que
+  la consumición sobrevive sin dueño. Si eso cambia, esta página cambia.
+-->
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0B0F14;
+    --surface: #151C24;
+    --border: #2A3644;
+    --text: #F2F5F8;
+    --muted: #93A1B0;
+    --faint: #5D6C7B;
+    --acento: #E0A458;
+    --ok: #4FB477;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 20px 72px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 660px; margin: 0 auto; }
+  .marca {
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 8px;
+  }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 20px; }
+  h2 {
+    font-size: 19px; margin: 36px 0 10px;
+    padding-top: 20px; border-top: 1px solid var(--border);
+  }
+  p, li { color: var(--muted); }
+  strong { color: var(--text); font-weight: 600; }
+  a { color: var(--acento); }
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 7px; }
+  .via {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px; margin: 18px 0;
+  }
+  .via h3 { margin: 0 0 4px; font-size: 17px; color: var(--text); }
+  .via .apunte { color: var(--faint); font-size: 14px; margin: 0 0 12px; }
+  .via ol { margin: 0; }
+  .rapida { border-color: rgba(79,180,119,.45); }
+  .rapida h3::after {
+    content: "inmediato"; margin-left: 10px; font-size: 12px;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ok); font-weight: 600;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+  th, td {
+    text-align: left; padding: 10px 12px;
+    border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  th { color: var(--text); font-weight: 600; }
+  td { color: var(--muted); }
+  .rellenar {
+    background: rgba(224,164,88,.14); color: var(--acento);
+    padding: 1px 6px; border-radius: 4px; font-weight: 600;
+  }
+  /* Dos listas, no datos tabulares: en tabla quedarían a 160 px por
+     celda en un móvil, que es donde se va a leer esto. */
+  .bloques { display: grid; gap: 14px; margin: 18px 0; }
+  @media (min-width: 620px) { .bloques { grid-template-columns: 1fr 1fr; } }
+  .bloque {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px;
+  }
+  .bloque h3 { margin: 0 0 10px; font-size: 16px; color: var(--text); }
+  .bloque ul { margin: 0; padding-left: 18px; }
+  .bloque li { margin-bottom: 5px; font-size: 15px; }
+  .bloque p { margin: 0; font-size: 15px; }
+  .aviso {
+    border-left: 3px solid var(--acento);
+    padding: 2px 0 2px 16px; margin: 20px 0;
+  }
+  footer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+    color: var(--faint); font-size: 14px;
+  }
+  @media (max-width: 480px) {
+    body { padding: 24px 16px 56px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="marca">Lo de Siempre</div>
+  <h1>Borrar mi cuenta</h1>
+
+  <p>
+    Puedes darte de baja cuando quieras y sin dar explicaciones. Hay dos
+    formas: desde la app, que es instantánea, o escribiéndonos si ya la
+    desinstalaste.
+  </p>
+
+  <div class="via rapida">
+    <h3>Desde la app</h3>
+    <p class="apunte">Si todavía la tienes instalada, es lo más rápido.</p>
+    <ol>
+      <li>Abre <strong>Lo de Siempre</strong> y entra con tu cuenta.</li>
+      <li>Ve a tu <strong>carnet</strong>.</li>
+      <li>Al final de la pantalla, pulsa <strong>Borrar mi cuenta</strong>.</li>
+      <li>Confirma. No hay vuelta atrás.</li>
+    </ol>
+  </div>
+
+  <div class="via">
+    <h3>Por correo</h3>
+    <p class="apunte">Si ya no tienes la app, o prefieres que lo hagamos nosotros.</p>
+    <ol>
+      <li>
+        Escribe a <a href="mailto:hola@lodesiempre.app">hola@lodesiempre.app</a>
+        <strong>desde la misma dirección con la que te registraste</strong>.
+        Es la única forma que tenemos de saber que la cuenta es tuya.
+      </li>
+      <li>Pon en el asunto: <strong>Borrar mi cuenta</strong>.</li>
+      <li>No hace falta nada más. Ni motivos, ni datos, ni el nombre del bar.</li>
+    </ol>
+    <p style="margin-bottom:0">
+      La borramos en un plazo máximo de <strong>30 días</strong>, y normalmente
+      en mucho menos. Te contestamos cuando esté hecho.
+    </p>
+  </div>
+
+  <div class="aviso">
+    <p>
+      <strong>Si eres dueño de un local</strong>, la app no te dejará borrarte
+      mientras seas el único administrador: el bar se quedaría sin nadie que
+      lo gobierne y con socios dentro. Nombra a otro dueño antes, o escríbenos
+      y lo resolvemos.
+    </p>
+  </div>
+
+  <h2>Qué se borra y qué no</h2>
+
+  <div class="bloques">
+    <div class="bloque">
+      <h3>Se borra para siempre</h3>
+      <ul>
+        <li>Tu cuenta y tu correo.</li>
+        <li>Tu nombre.</li>
+        <li>Tu código de socio (el del QR).</li>
+        <li>Tus puntos y visitas en todos los bares.</li>
+        <li>El registro de los premios que te llevaste.</li>
+      </ul>
+    </div>
+    <div class="bloque">
+      <h3>Se queda, pero deja de ser tuyo</h3>
+      <p>
+        El <strong>importe y la fecha</strong> de tus consumiciones, sin
+        ninguna referencia a ti.
+      </p>
+    </div>
+  </div>
+
+  <p>
+    Ese segundo bloque merece una explicación, porque es la parte que nadie
+    suele contar. Las consumiciones son <strong>ventas que el bar hizo de
+    verdad</strong>. Si desaparecieran al darte de baja, el local vería
+    encogerse sus números de meses pasados por un motivo que no tiene nada que
+    ver con su negocio.
+  </p>
+  <p>
+    Así que la fila se queda, pero <strong>se desliga de ti</strong>: pierde el
+    identificador de la persona y no hay manera de volver a asociarla contigo,
+    ni desde la app, ni desde el panel del bar, ni por nuestra parte. Deja de
+    ser un dato personal y pasa a ser una venta anónima más.
+  </p>
+  <p>
+    Y aunque no borres nada: <strong>a los trece meses eso ocurre solo</strong>.
+    Un proceso automático desliga cada noche las consumiciones que han pasado
+    ese plazo.
+  </p>
+
+  <h2>¿Y si sólo quiero salir de un bar?</h2>
+  <p>
+    No hace falta borrar la cuenta entera. Basta con dejar de ir: tu pase se
+    queda quieto y no pasa nada. Si quieres que además desaparezca tu progreso
+    en ese local concreto, escríbenos a
+    <a href="mailto:hola@lodesiempre.app">hola@lodesiempre.app</a> y lo hacemos.
+  </p>
+
+  <footer>
+    Lo de Siempre · <a href="privacidad.html">Política de privacidad</a>
+  </footer>
+
+</main>
+</body>
+</html>
