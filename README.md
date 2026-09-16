@@ -34,10 +34,15 @@ Editar sólo esta copia es la forma de que la política acabe mintiendo.
 
 ## Pendiente antes de darlas por buenas
 
-- **El correo `hola@lodesiempre.app` todavía no existe** — el dominio no está
-  registrado. El RGPD exige una vía de contacto real: mientras ese buzón no
-  responda, hay que poner uno que sí lo haga.
+- ~~**El correo `hola@lodesiempre.app` todavía no existe.**~~ **Resuelto el
+  16-sep-2026.** La vía de contacto de las dos páginas es ahora
+  `lodesiempre.app@gmail.com`, que existe y responde, así que el RGPD queda
+  cubierto sin esperar al dominio. Cuando `lodesiempre.app` esté registrado,
+  el buzón definitivo será `hola@lodesiempre.app`: se cambia en `web/` del
+  repo del proyecto y se vuelve a copiar aquí, **antes** de pegar las URL en
+  Play Console y no después.
 - Falta el **código postal y la localidad** de la dirección del responsable.
   La LSSI pide domicilio completo.
 
-Los dos avisos están también en la cabecera de cada fichero.
+El aviso que queda está también en la cabecera de cada fichero, junto con
+la nota de qué se resolvió y cuándo.
