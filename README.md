@@ -32,7 +32,7 @@ la política dice sobre el borrado y la anonimización sale de las migraciones
 **Si cambia el comportamiento, se edita allí y se vuelve a copiar aquí.**
 Editar sólo esta copia es la forma de que la política acabe mintiendo.
 
-## Pendiente antes de darlas por buenas
+## Lo que estaba pendiente, y ya no
 
 - ~~**El correo `hola@lodesiempre.app` todavía no existe.**~~ **Resuelto el
   16-sep-2026.** La vía de contacto de las dos páginas es ahora
@@ -41,8 +41,9 @@ Editar sólo esta copia es la forma de que la política acabe mintiendo.
   el buzón definitivo será `hola@lodesiempre.app`: se cambia en `web/` del
   repo del proyecto y se vuelve a copiar aquí, **antes** de pegar las URL en
   Play Console y no después.
-- Falta el **código postal y la localidad** de la dirección del responsable.
-  La LSSI pide domicilio completo.
+- ~~Falta el **código postal y la localidad** de la dirección del
+  responsable.~~ **Resuelto el 16-sep-2026:** `08970 Sant Joan Despí,
+  Barcelona`. La LSSI pide domicilio completo y ya lo está.
 
-El aviso que queda está también en la cabecera de cada fichero, junto con
-la nota de qué se resolvió y cuándo.
+Ya no queda ninguno: las dos páginas son publicables. Las cabeceras de cada
+fichero llevan la nota de qué se resolvió y cuándo.
